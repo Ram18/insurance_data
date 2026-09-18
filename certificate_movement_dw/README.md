@@ -2,7 +2,13 @@
 
 A ground-up rebuild of the **USS Certificate Movement** Power BI model as a proper
 Kimball star schema, built **in the SQL warehouse first** (`ADW_PROD10`) so the
-Power BI dataset sits cleanly on top.
+BI layer sits cleanly on top.
+
+> **Migration target: Databricks.** The report is being migrated off Power BI to
+> Databricks. The `databricks/` folder holds the Unity Catalog build — Delta gold
+> star, a **metric view** (semantic model + all measures, replacing the dataset +
+> DAX), and an **AI/BI dashboard**. The `sql/` folder below is the equivalent
+> SQL Server implementation of the same star (kept for reference / parallel run).
 
 **Design decisions (agreed):**
 
