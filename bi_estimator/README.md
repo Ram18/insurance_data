@@ -5,8 +5,22 @@ Quotable fixed-price estimator for BI report and semantic-model migrations. It r
 
 | File | Purpose |
 | --- | --- |
-| `BI_Migration_Estimator_v2.xlsx` | The workbook (Excel 365). Every figure is a live formula. |
-| `build_bi_estimator.py` | Generator that builds the workbook from code, so every formula can be reviewed and rebuilt. |
+| `BI_Migration_Presales_Estimator.xlsx` | **Pre-sales ballpark** (3 tabs). About a dozen inputs, a price range and a sprint plan like the original PoP sheet. |
+| `BI_Migration_Estimator_v2.xlsx` | **Full estimator** for the quotable fixed price (17 tabs). Every figure is a live formula. |
+| `build_bi_presales.py` / `build_bi_estimator.py` | Generators that build each workbook from code, so every formula can be reviewed and rebuilt. |
+
+## Pre-sales ballpark (simple version)
+
+- **Estimate**: project settings (sprint length, dev team, automation %, contingency, PM / AI readiness)
+  and one scope row per source → target pair (reports, pages, complexity profile, % retired, semantic
+  models). Results: expected price, ballpark range (-10% / +25%), hours, duration, sprints, peak and average
+  team, blended rate, phase table and checks.
+- **Plan**: sprint and week grid with coloured phase bars (FTE per week) and the team by role per week.
+  Team cells are pre-filled from the phases; overwrite any of them to hand-plan, and the cost follows the grid.
+- **Reference**: the numbers behind it, using the same baseline as the full estimator (hours per page,
+  model hours, pair factors, automation caps, rate card, role mix).
+
+Use the pre-sales file for early conversations, then move to the full estimator for the quote.
 
 ## Using the workbook
 
@@ -28,6 +42,7 @@ password**, so the BI team can unprotect them to change baseline values.
 ```bash
 python build_bi_estimator.py                                  # writes BI_Migration_Estimator_v2.xlsx
 python build_bi_estimator.py regression.xlsx --regression     # old base case, for the regression test
+python build_bi_presales.py                                   # writes BI_Migration_Presales_Estimator.xlsx
 ```
 
 openpyxl writes formulas without cached values. Recalculate once (open and save in Excel, or LibreOffice
